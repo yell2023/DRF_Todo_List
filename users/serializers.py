@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
     
-    def update(self,validated_data): # 지금 이게 업데이트는 넣어놓고 뷰에서만 안해준 상태인가?
+    def update(self,validated_data): 
         user = super().create(validated_data)
         password = user.password
         user.set_password(password)
