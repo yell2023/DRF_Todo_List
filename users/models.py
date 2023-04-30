@@ -31,9 +31,9 @@ class User(AbstractBaseUser): # 필수필드 id, email, password, name, gender, 
         max_length=255,
         unique=True,
     )
-    username = models.CharField(max_length=255,null=False) # 공백이면 안된다라고 넣고 싶어...
+    username = models.CharField(max_length=255,null=False) # 공백이면 안된다라고 넣고 싶어...REQUIRED_FIELDS = []여기에는 안넣고 또 저 위에 create에 안넣었지만 내가 null=False 이렇게 해둬서 회원가입 때 이름까지 입력해야하나봄!
     gender_choices = (
-        ('', 'Select Gender'),
+        ('-', 'Select Gender'),
         ('M','Man'),
         ('W','woman')
     )
