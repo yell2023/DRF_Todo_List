@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
-    
+
     def update(self,validated_data):
         user = super().create(validated_data)
         password = user.password
@@ -31,8 +31,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer): # 추가 요�
         token['age'] = user.age
         
         return token
-    
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id','email','username', 'age', 'gender', 'introduction')
+
