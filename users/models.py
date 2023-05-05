@@ -15,7 +15,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password=None): # 근데 내가 슈퍼유저 만드는거에는 네임을 안넣었는데 왜 슈퍼 유저 만들때도 유저 만들 때 넣은 것들이 나오는 거지?
+    def create_superuser(self, email, password=None): 
         user = self.create_user(
             email,
             password=password,
@@ -31,7 +31,7 @@ class User(AbstractBaseUser): # 필수필드 id, email, password, name, gender, 
         max_length=255,
         unique=True,
     )
-    username = models.CharField(max_length=255,null=False) # 공백이면 안된다라고 넣고 싶어...REQUIRED_FIELDS = []여기에는 안넣고 또 저 위에 create에 안넣었지만 내가 null=False 이렇게 해둬서 회원가입 때 이름까지 입력해야하나봄!
+    username = models.CharField(max_length=255,null=False) 
     gender_choices = (
         ('-', 'Select Gender'),
         ('M','Man'),
@@ -40,6 +40,7 @@ class User(AbstractBaseUser): # 필수필드 id, email, password, name, gender, 
     gender = models.CharField(max_length=1, choices=gender_choices, blank=True, default='')
     age = models.IntegerField(null=True)
     # age는 생년월일을 받아서 내가 계산하는 걸로 할까?
+    
     introduction = models.TextField(blank=True, default='')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

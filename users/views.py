@@ -22,15 +22,15 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class=CustomTokenObtainPairSerializer
     
 class UserProfileView(APIView):
-    def get(self, request, user_id):
-        user = get_object_or_404(User, id=user_id)
-        serializer = UserProfileSerializer(user)
+    def get(self, request, id):
+        user_profile = get_object_or_404(User, id=id)
+        serializer = UserProfileSerializer(user_profile)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    def put(self, request, user_id):
-        user = get_object_or_404(User, id=user_id)
-        serializer = UserSerializer(user, data=request.data)
-        if request.user == user.user:
+    def put(self, request, id):
+        user_profile = get_object_or_404(User, id=id)
+        serializer = UserSerializer(user_profile,data=request.data)
+        if request.user == user_profile:
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
@@ -39,9 +39,9 @@ class UserProfileView(APIView):
         else:
             return Response('권한이 없습니다!', status=status.HTTP_403_FORBIDDEN)
         
-    def delete(self, request, user_id):
-        user = get_object_or_404(User, id=user_id)
-        if request.user == user.user:
+    def delete(self, request, id):
+        user = get_object_or_404(User, id=id)
+        if request.user == user:
             user.delete()
             return Response('삭제되었습니다!', status=status.HTTP_204_NO_CONTENT)
         else:

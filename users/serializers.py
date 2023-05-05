@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
     def update(self,instance, validated_data):
-        user = super().create(instance,validated_data)
+        user = super().update(instance,validated_data)
         password = user.password
         user.set_password(password)
         user.save()
@@ -35,5 +35,5 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer): # 추가 요�
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','email','username', 'age', 'gender', 'introduction')
+        fields = ('id','email','username', 'age', 'gender', 'introduction',)
 

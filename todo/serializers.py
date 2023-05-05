@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from todo.models import Todo
 
+
 class TodoSerializer(serializers.ModelSerializer): 
     user = serializers.SerializerMethodField()
     
@@ -19,11 +20,11 @@ class TodoListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Todo
-        fields=('pk','title','is_complete')
+        fields=('pk','title','is_complete','user',)
         
 class TodoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields=('title','is_complete')  
+        fields=('title','is_complete',)  
     
     
